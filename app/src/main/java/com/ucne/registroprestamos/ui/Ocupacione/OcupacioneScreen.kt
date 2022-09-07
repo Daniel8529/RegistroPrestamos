@@ -25,14 +25,14 @@ fun OcupacioneScreen(
         topBar = {
             CenterAlignedTopAppBar(title = { Text("Ocupacione") })
         },
-        floatingActionButton = {
-            FloatingActionButton(onClick = {
-                viewModel.Save()
-                onNavigateBack()
-            }) {
-                Icon(imageVector = Icons.Default.Create, contentDescription = "Add a Ocupacione")
-            }
-        }
+//        floatingActionButton = {
+//            FloatingActionButton(onClick = {
+//                viewModel.Save()
+//                onNavigateBack()
+//            }) {
+//                Icon(imageVector = Icons.Default.Create, contentDescription = "Add a Ocupacione")
+//            }
+//        }
     ) {
         Column(
             modifier = Modifier
