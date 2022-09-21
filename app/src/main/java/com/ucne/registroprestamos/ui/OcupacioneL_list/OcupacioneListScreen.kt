@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ucne.registroprestamos.model.Ocupacione
+import com.ucne.registroprestamos.model.Persona
 import com.ucne.registroprestamos.repository.ocupacioneRepository
 import java.util.*
 
@@ -35,11 +36,8 @@ fun OcupacioneListScreen(
         topBar = {
             CenterAlignedTopAppBar(title = { Text("Lista de Ocupacione ") })
         },
-        floatingActionButton = {
-            FloatingActionButton(onClick = onClick) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add a Ocupacione")
-            }
-        }
+
+
     ) {
 
         val uiState by viewModel.uiState.collectAsState()
@@ -48,7 +46,7 @@ fun OcupacioneListScreen(
             .fillMaxWidth()
             .padding(it)) {
 
-            OcupacioneList(
+            PersonaList(
                 ocupacione = uiState.ocupaciones,
                 modifier = Modifier
                     .fillMaxSize()
@@ -63,7 +61,7 @@ fun OcupacioneListScreen(
 
 
 @Composable
-fun OcupacioneList(
+fun PersonaList(
     ocupacione: List<Ocupacione>,
     modifier: Modifier = Modifier
 ) {

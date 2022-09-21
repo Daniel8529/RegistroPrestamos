@@ -7,7 +7,7 @@ import com.ucne.registroprestamos.model.Ocupacione
 
 @Dao
 interface OcupacioneDao {
-    @Insert
+    @Insert(onConflict =OnConflictStrategy.REPLACE)
     suspend fun inser(ocupacione: Ocupacione)
 
     @Update
@@ -16,7 +16,7 @@ interface OcupacioneDao {
     @Delete
     suspend fun delete(ocupaciones:Ocupacione)
 
-    @Query("SELECT * FROM Ocupacione WHERE Id = :id")
+    @Query("SELECT * "+ "FROM Ocupacione"+" WHERE Id = :id")
 
     fun getOcupacione(id: Int): Flow<Ocupacione>
 

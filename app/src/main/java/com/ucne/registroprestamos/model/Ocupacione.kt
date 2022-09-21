@@ -2,7 +2,8 @@ package com.ucne.registroprestamos.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-@Entity()
+
+@Entity(tableName = "Ocupacione" )
 data class Ocupacione(
     @PrimaryKey(autoGenerate = true)
     val Id: Int=0,

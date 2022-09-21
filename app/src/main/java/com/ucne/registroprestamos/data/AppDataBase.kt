@@ -1,14 +1,44 @@
 package com.ucne.registroprestamos.data
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ucne.registroprestamos.model.Ocupacione
 import com.ucne.registroprestamos.data.dao.OcupacioneDao
+import com.ucne.registroprestamos.data.dao.PersonaDao
+import com.ucne.registroprestamos.data.dao.PrestamoDao
+import com.ucne.registroprestamos.model.Persona
+import com.ucne.registroprestamos.model.Prestamo
 
 @Database(
-    entities = [Ocupacione::class],
-    version = 2
+    entities = [Ocupacione::class, Persona::class,Prestamo::class],
+    version = 2,
+    exportSchema = false
 )
 abstract class AppDataBase : RoomDatabase() {
     abstract val ocupacioneDao:OcupacioneDao
+    abstract val personaDao:PersonaDao
+    abstract val prestamoDao:PrestamoDao
+    companion object {
+        @Volatile
+        private var INSTANCE: AppDataBase? = null
+        fun getInstance(context: Context): AppDataBase {
+            synchronized(this) {
+                var instance = INSTANCE
+
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        AppDataBase::class.java,
+                        "app_database"
+                    )
+                        .fallbackToDestructiveMigration()
+                        .build()
+                    INSTANCE = instance
+                }
+                return instance
+            }
+        }
+    }
 }
